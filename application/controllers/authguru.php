@@ -40,6 +40,7 @@ class authguru extends CI_Controller{
             {
                 $data = [
                     'nama' => $user['username']
+                    
                 ];
                 $this->session->set_userdata($data);
                 redirect('admin');

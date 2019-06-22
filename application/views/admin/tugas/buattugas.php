@@ -12,8 +12,9 @@
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Kode_Kelas</th>
+                        <th scope="col">Mata Pelajaran</th>
                         <th scope="col">Jenis Tugas</th>
-                        <th scope="col">Waktu</th>
+                        <th scope="col">Batas Waktu</th>
                         <th scope="col">Download</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -25,6 +26,7 @@
                         <tr>
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $at['id_kode_kelas']; ?></td>
+                            <td><?= $at['nama_mapel']; ?></td>
                             <td><?= $at['nama_tugas']; ?></td>
                             <td><?= $at['date']; ?></td>
                             <td><a href="<?= base_url() . 'admin/download/' . $at['nama_dokumen']; ?>" class="btn btn-success btn-sm">Download</a></td>
@@ -110,7 +112,7 @@ $i = 1;
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('admin/buattugas'); ?>" method="post">
+                <form action="<?= base_url('admin/edittugas'); ?>" method="post">
                     <div class="modal-body">
                         <label>Kode Kelas</label>
                         <div class="form-group">

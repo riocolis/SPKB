@@ -27,7 +27,7 @@ class Admin extends CI_Controller{
         $data['menu'] = $this->admin_model->kelas();
         $data['mapel'] = $this->admin_model->get_mapel();
         $data['kelas'] = $this->admin_model->get_kelas();
-        $data['guru'] = $this->admin_model->get_guru();
+        $data['guru'] = $this->admin_model->get_guru_name($this->session->userdata('nama'));
         $data['kode'] = $this->admin_model->kode_kelas();
 
         $this->form_validation->set_rules('mapel','Mapel','required');
@@ -140,14 +140,50 @@ class Admin extends CI_Controller{
                 'nama_dokumen' => $test,
                 'date' => $waktu
             );
-            
+            $this->db->insert('tugas',$data);
+            redirect('admin/buattugas');
+        }
+    }
+    public function edittugas()
+    {
+        $data['title'] = 'Buat Tugas';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas();
+        $data['upload'] = $this->admin_model->do_upload();
+        $data['alltugas'] = $this->admin_model->getalltugas();
+
+        $this->form_validation->set_rules('kode','KodeKelas','required');
+        $this->form_validation->set_rules('tugas','Tugas','required');
+        
+        if($this->form_validation->run()==false)
+        {
+            $this->load->view('templates/header',$data);
+            $this->load->view('templates/sidebarguru',$data);
+            $this->load->view('templates/topbarguru',$data);
+            $this->load->view('admin/tugas/buattugas',$data);
+            $this->load->view('templates/footerguru');
+        }
+        else
+        {
+            $kode = $this->input->post('kode');
+            $tugas = $this->input->post('tugas');
+            $waktu = $this->input->post('tanggal');
+            $doc = $_FILES['doc']['name'];
+            $test = str_replace(' ','_',$doc);
+        
+            $data = array(
+                'id_kode_kelas' => $kode,
+                'id_tugas' => $tugas,
+                'nama_dokumen' => $test,
+                'date' => $waktu
+            );
+            var_dump($data);
+            die();
             if($this->admin_model->cektugas($kode,$tugas)==true)
             {
+                
                 $this->db->update('tugas',$data);
-            }
-            else
-            {
-                $this->db->insert('tugas',$data);
             }
             redirect('admin/buattugas');
         }

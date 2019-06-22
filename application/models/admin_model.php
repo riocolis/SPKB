@@ -20,6 +20,12 @@ class Admin_model extends CI_Model
         $query = $this->db->get('nama_guru');
         return $query->result_array();
     }
+    public function get_guru_name($name)
+    {
+        $this->db->where('username',$name);
+        $query = $this->db->get('nama_guru');
+        return $query->result_array();
+    }
     public function get_siswa()
     {
         $query = $this->db->get('nama_siswa');
@@ -94,6 +100,7 @@ class Admin_model extends CI_Model
         $this->db->from('tugas');
         $this->db->join('kelas','tugas.id_kode_kelas = kelas.kode_kelas');
         $this->db->join('nama_tugas','tugas.id_tugas = nama_tugas.id');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $query = $this->db->get();
         return $query->result_array();
     }
