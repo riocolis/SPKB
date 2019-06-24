@@ -10,7 +10,7 @@
                 <select name="kode" id="kode" class="form-control form-control-lg">
                   <option value="0">Pilih Kode Kelas</option>
                   <?php foreach ($kelas as $ks) { ?>
-                    <option value="<?= $ks['kode_kelas'] ?>"><?= $ks['kode_kelas']; ?></option>
+                    <option value="<?= $ks['kode_kelas'] ?>"><?= $ks['kode_kelas']; ?>-<?= $ks['nama_mapel']?></option>
                   <?php } ?>
                 </select>
                 <hr>

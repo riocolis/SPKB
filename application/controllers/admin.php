@@ -86,7 +86,7 @@ class Admin extends CI_Controller{
         $data['menu'] = $this->admin_model->kelas($this->session->userdata('nama'));
         $data['mapel'] = $this->admin_model->get_mapel();
         $data['kelas'] = $this->admin_model->get_kelas();
-        $data['guru'] = $this->admin_model->get_guru();
+        $data['guru'] = $this->admin_model->get_guru_name($this->session->userdata('nama'));
         $data['kode'] = $this->admin_model->kode_kelas();
 
         $this->load->view('templates/header',$data);

@@ -101,6 +101,7 @@ class User extends CI_Controller{
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
         
         $data['kode'] = $this->input->post('kode');
+        $data['mapel'] = $this->user_model->get_mapelkelas($data['kode']);
         $id_tugas = 1;
         $id_siswa = $this->session->userdata('id');
         $data['kelas'] = $this->user_model->get_kode_id($id_siswa);

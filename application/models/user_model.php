@@ -61,6 +61,13 @@ class user_model extends CI_Model
             return false;
         }
     }
+    public function get_mapelkelas($data)
+    {
+        $this->db->where('kode_kelas',$data);
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
+        $query = $this->db->get('kelas');
+        return $query->result_array();
+    }
     public function get_tugas()
     {
         $query = $this->db->get('nama_tugas');
