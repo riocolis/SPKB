@@ -24,7 +24,7 @@ class Admin extends CI_Controller{
     {
         $data['title'] = 'Buat Kelas';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
-        $data['menu'] = $this->admin_model->kelas();
+        $data['menu'] = $this->admin_model->kelas($this->session->userdata('nama'));
         $data['mapel'] = $this->admin_model->get_mapel();
         $data['kelas'] = $this->admin_model->get_kelas();
         $data['guru'] = $this->admin_model->get_guru_name($this->session->userdata('nama'));
@@ -83,7 +83,7 @@ class Admin extends CI_Controller{
         }
         $data['title'] = 'Buat Kelas';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
-        $data['menu'] = $this->admin_model->kelas();
+        $data['menu'] = $this->admin_model->kelas($this->session->userdata('nama'));
         $data['mapel'] = $this->admin_model->get_mapel();
         $data['kelas'] = $this->admin_model->get_kelas();
         $data['guru'] = $this->admin_model->get_guru();
@@ -111,9 +111,9 @@ class Admin extends CI_Controller{
         $data['title'] = 'Buat Tugas';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
         $data['upload'] = $this->admin_model->do_upload();
-        $data['alltugas'] = $this->admin_model->getalltugas();
+        $data['alltugas'] = $this->admin_model->getalltugas($this->session->userdata('nama'));
 
         $this->form_validation->set_rules('kode','KodeKelas','required');
         $this->form_validation->set_rules('tugas','Tugas','required');
@@ -149,7 +149,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Buat Tugas';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
         $data['upload'] = $this->admin_model->do_upload();
         $data['alltugas'] = $this->admin_model->getalltugas();
 
@@ -178,8 +178,6 @@ class Admin extends CI_Controller{
                 'nama_dokumen' => $test,
                 'date' => $waktu
             );
-            var_dump($data);
-            die();
             if($this->admin_model->cektugas($kode,$tugas)==true)
             {
                 
@@ -193,7 +191,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Tugas Siswa';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
 
         $this->load->view('templates/header',$data);
         $this->load->view('templates/sidebarguru',$data);
@@ -243,7 +241,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Nilai';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
         
         $this->form_validation->set_rules('kode','KodeKelas','required');
         $this->form_validation->set_rules('tugas','Tugas','required');
@@ -261,7 +259,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Tampil Nilai';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
 
         $kode = $this->input->post('kode');
         $tugas = $this->input->post('tugas');
@@ -310,7 +308,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Kelompok';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
 
         $this->load->view('templates/header',$data);
         $this->load->view('templates/sidebarguru',$data);
@@ -323,7 +321,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Pembagian Kelompok';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
 
         $kode = $this->input->post('kode');
         $tugas = $this->input->post('tugas');
@@ -342,7 +340,7 @@ class Admin extends CI_Controller{
         $data['title'] = 'Bagi Kelompok Kelompok';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
         
         $kode = $this->input->post('kode1');
         $tugas = $this->input->post('tugas1');

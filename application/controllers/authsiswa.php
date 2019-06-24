@@ -86,11 +86,12 @@ class authsiswa extends CI_Controller{
                 $data = [
                     //'id_nis' => $this->input->post('id_nis'),
                     'nama_siswa' =>  htmlspecialchars($this->input->post('nama')),
+                    'nama_lengkap_siswa' => htmlspecialchars($this->input->post('namalengkap')),
                     'jenis_kelamin' => $this->input->post('kelamin'),
                     'password' =>  password_hash($this->input->post('password1'),PASSWORD_DEFAULT),
                     'id_kelas' => $this->input->post('kelas')
                 ];
-                $this->db->where('nama_siswa',$this->input->post('nama'));
+                $this->db->where('id_nis',$this->input->post('id_nis'));
                 $this->db->update('nama_siswa',$data);
                 $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Data Edit Suksess !! </div>');
                 redirect('authsiswa');
@@ -100,13 +101,14 @@ class authsiswa extends CI_Controller{
                 $data = [
                     'id_nis' => $this->input->post('id_nis'),
                     'nama_siswa' =>  htmlspecialchars($this->input->post('nama')),
+                    'nama_lengkap_siswa' => htmlspecialchars($this->input->post('namalengkap')),
                     'jenis_kelamin' => $this->input->post('kelamin'),
                     'password' =>  password_hash($this->input->post('password1'),PASSWORD_DEFAULT),
                     'id_kelas' => $this->input->post('kelas')
                 ];
                 $this->db->insert('nama_siswa',$data);
                 $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Data simpan Suksess !! </div>');
-                redirect('authsiswa');
+                redirect('authsiswa/registration');
             }
 
         }

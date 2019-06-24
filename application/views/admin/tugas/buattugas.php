@@ -112,7 +112,7 @@ $i = 1;
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('admin/edittugas'); ?>" method="post">
+                <form action="<?= base_url('admin/edittugas'); ?>" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <label>Kode Kelas</label>
                         <div class="form-group">

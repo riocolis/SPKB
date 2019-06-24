@@ -4,12 +4,13 @@
             <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
             <a href="<?= base_url('admin/kategorinilai') ?>" class="btn btn-danger mb-3" >Kembali</a>
             <div class="row">
-                <div class="col-lg-6">  
+                <div class="col-lg-8">  
                     <table class="table table-hover" id="tampil_table_siswa">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Kode Kelas</th>
+                                <th scope="col">Mata Pelajaran</th>
                                 <th scope="col">NIS Siswa</th>
                                 <th scope="col">Nama Siswa</th>
                                 <th scope="col">Jenis Kelamin</th>
@@ -24,6 +25,7 @@
                                 <tr>
                                     <th scope="row" value=<?= $i;?>><?= $i; ?></th>
                                     <td><?= $sw['kode_kelas']; ?></td>
+                                    <td><?= $sw['nama_mapel']?></td>
                                     <td><?= $sw['id_nis']; ?></td>
                                     <td><?= $sw['nama_siswa']; ?></td>
                                     <td><?= $sw['jenis_kelamin']; ?></td>

@@ -9,6 +9,7 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Kode Kelas</th>
+                                <th scope="col">Mata Pelajaran</th>
                                 <th scope="col">NIS Siswa</th>
                                 <th scope="col">Nama Siswa</th>
                                 <th scope="col">Jawaban</th>
@@ -21,6 +22,7 @@
                                 <tr>
                                     <th scope="row" value=<?= $i;?>><?= $i; ?></th>
                                     <td><?= $sw['kode_kelas']; ?></td>
+                                    <td><?= $sw['nama_mapel']; ?></td>
                                     <td><?= $sw['id_nis']; ?></td>
                                     <td><?= $sw['nama_siswa']; ?></td>
                                     <td><a href="<?= base_url() . 'admin/downloadtugassiswa/'.$sw['nama_dokumen']; ?>" class="btn btn-success btn-sm">Download</a></td>

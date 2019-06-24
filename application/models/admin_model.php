@@ -57,13 +57,14 @@ class Admin_model extends CI_Model
         $query = $this->db->get('tugas_siswa_kelompok');
         return $query->result_array();
     }
-    public function kelas()
+    public function kelas($nama)
     {
         $this->db->select('*');
         $this->db->from('kelas');
         $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $this->db->join('nama_kelas','kelas.id_kelas = nama_kelas.id');
         $this->db->join('nama_guru','kelas.id_guru = nama_guru.id');
+        $this->db->where('username',$nama);
         $this->db->order_by('kode_kelas','ASC');
         $query = $this->db->get();
         return $query->result_array();
@@ -94,13 +95,15 @@ class Admin_model extends CI_Model
         return $query->result_array();
     }
 
-    public function getalltugas()
+    public function getalltugas($test)
     {
         $this->db->select('*');
         $this->db->from('tugas');
         $this->db->join('kelas','tugas.id_kode_kelas = kelas.kode_kelas');
         $this->db->join('nama_tugas','tugas.id_tugas = nama_tugas.id');
         $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
+        $this->db->join('nama_guru','kelas.id_guru = nama_guru.id');
+        $this->db->where('username',$test);
         $query = $this->db->get();
         return $query->result_array();
     }
