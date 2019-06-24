@@ -86,7 +86,6 @@ class authsiswa extends CI_Controller{
                 $data = [
                     //'id_nis' => $this->input->post('id_nis'),
                     'nama_siswa' =>  htmlspecialchars($this->input->post('nama')),
-                    'nama_lengkap_siswa' => htmlspecialchars($this->input->post('namalengkap')),
                     'jenis_kelamin' => $this->input->post('kelamin'),
                     'password' =>  password_hash($this->input->post('password1'),PASSWORD_DEFAULT),
                     'id_kelas' => $this->input->post('kelas')
@@ -101,7 +100,6 @@ class authsiswa extends CI_Controller{
                 $data = [
                     'id_nis' => $this->input->post('id_nis'),
                     'nama_siswa' =>  htmlspecialchars($this->input->post('nama')),
-                    'nama_lengkap_siswa' => htmlspecialchars($this->input->post('namalengkap')),
                     'jenis_kelamin' => $this->input->post('kelamin'),
                     'password' =>  password_hash($this->input->post('password1'),PASSWORD_DEFAULT),
                     'id_kelas' => $this->input->post('kelas')

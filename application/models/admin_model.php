@@ -140,6 +140,7 @@ class Admin_model extends CI_Model
         $this->db->join('kelas','nilai.id_kode_kelas = kelas.kode_kelas');
         $this->db->join('nama_tugas','nilai.id_tugas = nama_tugas.id');
         $this->db->join('nama_siswa','nilai.id_siswa = nama_siswa.id');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $this->db->where('id_kode_kelas ',$kode);
         $this->db->where('id_tugas',$jenis);
         $this->db->order_by('id_siswa','ASC');
@@ -161,6 +162,7 @@ class Admin_model extends CI_Model
         $this->db->join('kelas','nilai.id_kode_kelas = kelas.kode_kelas');
         $this->db->join('nama_tugas','nilai.id_tugas = nama_tugas.id');
         $this->db->join('nama_siswa','nilai.id_siswa = nama_siswa.id');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $this->db->where('id_kode_kelas ',$kode);
         $this->db->where('id_tugas',$jenis);
         $this->db->order_by('nilai','DESC');
@@ -311,6 +313,13 @@ class Admin_model extends CI_Model
             return false;
         }
         
+    }
+    public function get_mapelkelas($data)
+    {
+        $this->db->where('kode_kelas',$data);
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
+        $query = $this->db->get('kelas');
+        return $query->result_array();
     }
 }
 

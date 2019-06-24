@@ -67,7 +67,7 @@
                     <select name="kode" class="form-control form-control-lg">
                         <option value="0">Pilih Kode Kelas</option>
                         <?php foreach ($kelas as $ks) { ?>
-                            <option value="<?= $ks['kode_kelas'] ?>"><?= $ks['kode_kelas']; ?></option>
+                            <option value="<?= $ks['kode_kelas'] ?>"><?= $ks['kode_kelas']; ?>-<?= $ks['nama_mapel']?></option>
                         <?php } ?>
                     </select>
                     <hr>
@@ -116,7 +116,7 @@ $i = 1;
                     <div class="modal-body">
                         <label>Kode Kelas</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="kode" value="<?= $at['id_kode_kelas']; ?>" readonly="readonly">
+                            <input type="text" class="form-control" name="kode" value="<?= $at['id_kode_kelas']; ?>">
                         </div>
                         <input type="hidden" class="form-control" name="tugas" value="<?= $at['id_tugas']; ?>" readonly="readonly">
                         <div class="form-group">

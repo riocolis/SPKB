@@ -7,16 +7,21 @@
             <div class="col-lg-8">
             <a href="<?= base_url('admin/kelompok') ?>" class="btn btn-danger mb-3" >Kembali</a>
             <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newBagiKelompok" >Buat Kelompok</a>
-            <form action="<?= base_url('admin/bagibagikelompok') ?>" method="post">
+            <form action="<?= base_url('admin/lihatkelompok') ?>" method="post">
               <input type="hidden" class="form-control" name="kode1" value="<?= $simple;?>">
               <input type="hidden" class="form-control" name="tugas1" value="<?= $tugas;?>">
             <button type="submit" class="btn btn-success mb-3" >Lihat Kelompok</button>
             </form>
+            <h1><?= $simple; ?></h1>
+                    </h1><?php foreach($mapel as $mp){?>
+                    <h2><?= $mp['nama_mapel']?></h2>
+                    <?php } ?>
                 <table class="table table-hover" id="tampil_table_siswa">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Kode Kelas</th>
+                            <th scope="col">Nama Mapel</th>
                             <th scope="col">NIS Siswa</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Jenis Kelamin</th>
@@ -30,6 +35,7 @@
                             <tr>
                                 <th scope="row" value=<?= $i; ?>><?= $i; ?></th>
                                 <td><?= $sw['kode_kelas']; ?></td>
+                                <td><?= $sw['nama_mapel']; ?></td>
                                 <td><?= $sw['id_nis']; ?></td>
                                 <td><?= $sw['nama_siswa']; ?></td>
                                 <td><?= $sw['jenis_kelamin']; ?></td>
@@ -78,6 +84,8 @@
                         <option value=3>3</option>
                         <option value=4>4</option>                        
                         <option value=5>5</option>                        
+                        <option value=6>6</option>                        
+                        <option value=7>7</option>                        
                     </select>
                     <hr>
         </div>

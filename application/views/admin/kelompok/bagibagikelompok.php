@@ -4,9 +4,12 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800"><?= $title; ?> </h1>
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-md-6">
                     <a href="<?= base_url('admin/kelompok') ?>" class="btn btn-danger mb-3">Kembali</a>
                     <h1><?= $simple; ?></h1>
+                    </h1><?php foreach($mapel as $mp){?>
+                    <h2><?= $mp['nama_mapel']?></h2>
+                    <?php } ?>
                     <?php
                     $i = 1;
                     $cek = 1;
@@ -51,7 +54,7 @@
                     </div>
                 <?php } ?>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-5 float-right">
                 <h1>Nilai</h1>
                 <table class="table table-hover" id="tampil_table_siswa">
                         <thead>

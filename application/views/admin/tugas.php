@@ -6,7 +6,7 @@
           
           <div class="row">
               <div class="col-lg-8">
-              <a href="<?= base_url('admin/tugassiswa')?>" class="btn btn-success mb-3" >Lihat Tugas </a>
+              <a href="<?= base_url('admin/tugassiswa')?>" class="btn btn-success mb-3" >Cek Tugas Siswa </a>
               <a href="<?= base_url('admin/buattugas');?>" class="btn btn-primary mb-3">Buat Tugas</a>
               </div>
           </div>

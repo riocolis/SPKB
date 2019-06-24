@@ -4,7 +4,7 @@
             <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
             <a href="<?= base_url('admin/kategorinilai') ?>" class="btn btn-danger mb-3" >Kembali</a>
             <div class="row">
-                <div class="col-lg-6">  
+                <div class="col-lg-8">  
                     <table class="table table-hover" id="tampil_table_siswa">
                         <thead>
                             <tr>
@@ -65,6 +65,9 @@ $i =1 ;
          </div>
          <div class="form-group">
             <input type="hidden" class="form-control" name="tugas1" value="<?= $tugas;?>">
+         </div>
+         <div class="form-group">
+            <input type="hidden" class="form-control" name="id_siswa" value="<?= $sw['id_siswa'];?>">
          </div>
          <label>Siswa</label>
          <div class="form-group">

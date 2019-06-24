@@ -10,7 +10,9 @@ class User extends CI_Controller{
     public function index()
     {
         $data['title'] = 'Halaman Utama Siswa';
+        
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        $data['kelas'] = $this->db->get_where('nama_kelas', ['id' => $this->session->userdata('id_kelas')])->row_array();
 
         $this->load->view('templates/header',$data);
         $this->load->view('templates/sidebarsiswa',$data);
@@ -100,6 +102,7 @@ class User extends CI_Controller{
         $data['title'] = 'Upload Individu';
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
         
+        
         $data['kode'] = $this->input->post('kode');
         $data['mapel'] = $this->user_model->get_mapelkelas($data['kode']);
         $id_tugas = 1;
@@ -124,6 +127,7 @@ class User extends CI_Controller{
     {
         $data['title'] = 'Upload Individu';
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        $data['kelas'] = $this->db->get_where('nama_kelas', ['nama_kelas' => $this->session->userdata('id_kelas')])->row_array();
         $data['upload'] = $this->user_model->do_upload();
         
         $data['kode'] = $this->input->post('kode');

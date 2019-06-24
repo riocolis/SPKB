@@ -18,11 +18,8 @@
                   <?= form_error('id_nis','<small class="text-danger pl-3">','</small>'); ?>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="name" name="nama" placeholder="Masukkan Username">
+                  <input type="text" class="form-control form-control-user" id="name" name="nama" placeholder="Masukkan Nama Lengkap">
                   <?= form_error('nama','<small class="text-danger pl-3">','</small>'); ?>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="name" name="namalengkap" placeholder="Masukkan Nama Lengkap">
                 </div>
                 <div class="form-group">
                 <label>Pilih Jenis Kelamin</label>
