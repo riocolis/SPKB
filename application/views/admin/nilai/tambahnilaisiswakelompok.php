@@ -22,6 +22,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Kode Kelas</th>
+                                    <th scope="col">Nama Mapel</th>
                                     <th scope="col">NIS</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Jenis Kelamin</th>
@@ -37,6 +39,8 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row"><?= $t; ?></th>
+                                        <td><?= $print['id_kode_kelas']; ?></td>
+                                        <td><?= $print['nama_mapel']; ?></td>
                                         <td><?= $print['id_nis']; ?></td>
                                         <td><?= $print['nama_siswa']; ?></td>
                                         <td><?= $print['jenis_kelamin']; ?></td>
@@ -87,7 +91,7 @@ $i = 1;
                             <input type="hidden" class="form-control" name="tugas1" value="<?= $tugas; ?>">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="id_siswa" value="<?= $sw['id_siswa']; ?>" readonly="readonly">
+                            <input type="hidden" class="form-control" name="id_siswa" value="<?= $sw['id_siswa']; ?>" readonly="readonly">
                         </div>
                         <label>Siswa</label>
                         <div class="form-group">

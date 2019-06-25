@@ -11,6 +11,7 @@
             <?php } ?>
             <?php
             $i = 1;
+            $iterasi = 1;
             $cek = 1;
             if ($this->admin_model->cekkodekelompok($simple) == true) {
                 foreach ($test as $gt) {
@@ -21,6 +22,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Kode Kelas</th>
+                                    <th scope="col">Nama Mapel</th>
                                     <th scope="col">NIS</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Jenis Kelamin</th>
@@ -36,18 +39,20 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row"><?= $t; ?></th>
+                                        <td><?= $print['id_kode_kelas']; ?></td>
+                                        <td><?= $print['nama_mapel']; ?></td>
                                         <td><?= $print['id_nis']; ?></td>
                                         <td><?= $print['nama_siswa']; ?></td>
                                         <td><?= $print['jenis_kelamin']; ?></td>
                                         <td><?= $print['id_kelompok']; ?></td>
                                         <td><?= $print['nilai']; ?></td>
                                         <td>
-                                            <a href="" class="badge badge-success" data-toggle="modal" data-target="#editSiswaModal<?= $t; ?>">Edit</a>
+                                            <a href="" class="badge badge-success" data-toggle="modal" data-target="#editSiswaModal<?= $iterasi; ?>">Edit</a>
                                             <!--<a href="" data-toggle="modal" data-target="#HapusSiswaModal">Hapus</a>-->
                                         </td>
                                     </tr>
                                 </tbody>
-                                <?php $t++;
+                                <?php $t++; $iterasi++;
                             }
                             ?>
                         </table>
@@ -86,7 +91,11 @@ $i = 1;
                             <input type="hidden" class="form-control" name="tugas1" value="<?= $tugas; ?>">
                         </div>
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="id_siswa" value="<?= $sw['id_siswa']; ?>">
+                            <input type="hidden" class="form-control" name="id_siswa" value="<?= $sw['id_siswa']; ?>" readonly="readonly">
+                        </div>
+                        <label>NIS Siswa </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="<?= $sw['id_nis']; ?>" readonly="readonly">
                         </div>
                         <label>Siswa</label>
                         <div class="form-group">

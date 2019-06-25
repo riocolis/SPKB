@@ -357,30 +357,6 @@ class Admin extends CI_Controller{
         $this->load->view('admin/nilai/tambahnilaisiswa',$data);
         $this->load->view('templates/footerguru');
     }
-
-    public function tambahnilaisiswakelompok()
-    {
-        $data['title'] = 'Tampil Nilai Kelompok';
-        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
-        $data['tugas'] = $this->admin_model->get_tugas();
-        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
-
-        $kode = $this->input->post('kode');
-        $tugas = $this->input->post('tugas');
-        $data['simple'] = $kode;
-        $data['tugas'] = $tugas;
-        $data['siswa'] = $this->admin_model->getallnilaikelompok($kode,$tugas);
-        $data['mapel'] = $this->admin_model->get_mapelkelas($kode);
-        $data['test']=$this->admin_model->get_bagikelompok();
-        
-
-        $this->load->view('templates/header',$data);
-        $this->load->view('templates/sidebarguru',$data);
-        $this->load->view('templates/topbarguru',$data);
-        $this->load->view('admin/nilai/tambahnilaisiswakelompok',$data);
-        $this->load->view('templates/footerguru');
-    }
-
     public function editnilai()
     {
         $data['title'] = 'Edit Nilai Individu';
@@ -407,6 +383,29 @@ class Admin extends CI_Controller{
         $this->load->view('templates/sidebarguru',$data);
         $this->load->view('templates/topbarguru',$data);
         $this->load->view('admin/nilai/editnilai',$data);
+        $this->load->view('templates/footerguru');
+    }
+
+    public function tambahnilaisiswakelompok()
+    {
+        $data['title'] = 'Tampil Nilai Kelompok';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
+
+        $kode = $this->input->post('kode');
+        $tugas = $this->input->post('tugas');
+        $data['simple'] = $kode;
+        $data['tugas'] = $tugas;
+        $data['siswa'] = $this->admin_model->getallnilaikelompok($kode,$tugas);
+        $data['mapel'] = $this->admin_model->get_mapelkelas($kode);
+        $data['test']=$this->admin_model->get_bagikelompok();
+        
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/nilai/tambahnilaisiswakelompok',$data);
         $this->load->view('templates/footerguru');
     }
 

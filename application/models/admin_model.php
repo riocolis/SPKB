@@ -304,9 +304,11 @@ class Admin_model extends CI_Model
     }
     public function get_kelompoksiswanilai($kode,$id_kel)
     {
-        $this->db->where('kode_kelas',$kode);
+        $this->db->where('kelompok.kode_kelas',$kode);
         $this->db->where('id_kelompok',$id_kel);
         $this->db->join('nilai','nilai.id_siswa = kelompok.id_siswa AND nilai.id_tugas = kelompok.id_tugas');
+        $this->db->join('kelas','nilai.id_kode_kelas = kelas.kode_kelas');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $this->db->order_by('kelompok.id_kelompok','ASC');
         $query = $this->db->get('kelompok');
         return $query->result_array();

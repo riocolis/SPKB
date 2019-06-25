@@ -116,7 +116,7 @@ $i = 1;
                     <div class="modal-body">
                         <label>Kode Kelas</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="kode" value="<?= $at['id_kode_kelas']; ?>">
+                            <input type="text" class="form-control" name="kode" value="<?= $at['id_kode_kelas']; ?>"readonly="readonly">
                         </div>
                         <input type="hidden" class="form-control" name="tugas" value="<?= $at['id_tugas']; ?>" readonly="readonly">
                         <div class="form-group">
