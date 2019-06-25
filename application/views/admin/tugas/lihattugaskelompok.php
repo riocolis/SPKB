@@ -9,27 +9,24 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th sco pe="col">Kode Kelas</th>
-                                <th scope="col">Mata Pelajaran</th>
-                                <th scope="col">NIS Siswa</th>
-                                <th scope="col">Nama Siswa</th>
+                                <th scope="col">Kode Kelas</th>
+                                <th scope="col">Kelompok</th>
                                 <th scope="col">Jawaban</th>
                             </tr>
                         </thead>
                         <?php
                         $i = 1;
-                        foreach ($siswa as $sw) { ?>
+                        foreach ($siswa as $sw) { 
+                            if($sw['id_kelompok']==$i) {?>
                             <tbody>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
                                     <td><?= $sw['kode_kelas']; ?></td>
-                                    <td><?= $sw['nama_mapel']; ?></td>
-                                    <td><?= $sw['id_nis']; ?></td>
-                                    <td><?= $sw['nama_siswa']; ?></td>
-                                    <td><a href="<?= base_url() . 'admin/downloadtugassiswa/'.$sw['nama_dokumen']; ?>" class="btn btn-success btn-sm">Download</a></td>
+                                    <td>Kelompok <?= $sw['id_kelompok']; ?></td>
+                                    <td><a href="<?= base_url() . 'admin/downloadtugassiswakelompok/'.$sw['nama_dokumen']; ?>" class="btn btn-success btn-sm">Download</a></td>
                                 </tr>
                             </tbody>
-                            <?php $i++;
+                            <?php } $i++;
                         } ?>
                     </table>
                     </form>

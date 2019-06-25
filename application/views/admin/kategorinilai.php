@@ -1,32 +1,15 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <!-- Page Heading -->
-  <h1 class="h3 mb-4 text-gray-800"><?= $title; ?> </h1>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?> </h1>
 
-  <div class="row">
-    <div class="col-lg-6">
-      <form action="<?= base_url('admin/tambahnilaisiswa')?>" method="post">
-      <label>Kode Kelas</label>
-        <select name="kode" id="kode" class="form-control form-control-lg">
-            <option value="0">Pilih Kode Kelas</option>
-            <?php foreach ($kelas as $ks) { ?>
-              <option value="<?= $ks['kode_kelas'] ?>"><?= $ks['kode_kelas']; ?>-<?= $ks['nama_mapel']?></option>
-            <?php } ?>
-          </select>
-          <hr>
-          <label>Jenis Tugas</label>
-          <select name="tugas" class="form-control form-control-lg">
-            <option value="0">Pilih Jenis Tugas</option>
-            <?php foreach ($tugas as $ts) { ?>
-              <option value="<?= $ts['id'] ?>"><?= $ts['nama_tugas']; ?></option>
-            <?php } ?>
-          </select>
-            <hr>
-          <button type="submit" class="btn btn-primary">Masukkan Nilai</button>
-      </form>
+    <div class="row">
+        <div class="col-lg-8">
+            <a href="<?= base_url('admin/nilaitugasindividu'); ?>" class="btn btn-success mb-3">Nilai Siswa Individu</a>
+            <a href="<?= base_url('admin/nilaitugaskelompok'); ?>" class="btn btn-primary mb-3">Nilai Siswa Kelompok</a>
+        </div>
     </div>
-  </div>
 </div>
 <!-- /.container-fluid -->
 
@@ -35,3 +18,5 @@
 
 <!-- modal-->
 <!-- Button trigger modal -->
+
+<!-- Modal -->

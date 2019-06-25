@@ -148,11 +148,6 @@ class user_model extends CI_Model
             return false;
         }
     }
-
-    public function uploaduploadsiswa($kode,$kelas)
-    {
-
-    }
     public function do_upload()
     {
         $config['upload_path'] = './dokumensiswa/';
@@ -167,8 +162,26 @@ class user_model extends CI_Model
             return $query;
         }
     }
+    public function do_upload2()
+    {
+        $config['upload_path'] = './dokumensiswakelompok/';
+        $config['allowed_types'] = 'doc|docx|pdf|xls|xlsx';
+        $config['remove_space'] = true;
+
+        $this->load->library('upload',$config);
+        
+        if(! $this->upload->do_upload('doc'))
+        {
+            $query = $this->upload->data();
+            return $query;
+        }
+    }
     public function downloadtugassiswa($nama){
         $query = $this->db->get_where('tugas_siswa',array('nama_dokumen'=> $nama));
+        return $query->row_array();
+    }
+    public function downloadtugassiswakelompok($nama){
+        $query = $this->db->get_where('tugas_siswa_kelompok',array('nama_dokumen'=> $nama));
         return $query->row_array();
     }
     public function get_bagikelompok()
@@ -186,10 +199,18 @@ class user_model extends CI_Model
         $query = $this->db->get('kelompok');
         return $query->result_array();
     }
+    public function ceknilaikodekelompok($kode,$idkel)
+    {
+        $this->db->where('kode_kelas',$kode);
+        $this->db->where('id_kelompok',$idkel);
+        $this->db->join('nilai','nilai.id_siswa = kelompok.id_siswa AND nilai.id_tugas = kelompok.id_tugas');
+        $query = $this->db->get('kelompok');
+        return $query->result_array();
+    }
     public function cekuploadsiswa($kode_kelas,$id_siswa)
     {
         $this->db->where('id_siswa',$id_siswa);
-        $this->db->where('kode_kelas',$kode_kelas);
+        $this->db->where('id_kode_kelas',$kode_kelas);
         $query = $this->db->get('tugas_siswa');
         if($query->num_rows() > 0)
         {
@@ -199,6 +220,30 @@ class user_model extends CI_Model
         {
             return false;
         }
+    }
+    public function cekuploadsiswakelompok($kode_kelas,$kelompok)
+    {
+        $this->db->where('id_kelompok',$kelompok);
+        $this->db->where('id_kode_kelas',$kode_kelas);
+        $query = $this->db->get('tugas_siswa_kelompok');
+        if($query->num_rows() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public function get_kode_id2($id)
+    {
+        $this->db->join('kelas','nilai.id_kode_kelas = kelas.kode_kelas');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
+        $this->db->where('id_siswa',$id);
+        $this->db->where('id_tugas',2);
+        $this->db->order_by('id_kode_kelas','ASC');
+        $query = $this->db->get('nilai');
+        return $query->result_array();
     }
 }
 

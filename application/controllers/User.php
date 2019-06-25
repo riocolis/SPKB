@@ -86,7 +86,7 @@ class User extends CI_Controller{
     }
     public function tugasindividu()
     {
-        $data['title'] = 'Upload Individu';
+        $data['title'] = 'Tugas Individu';
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
         
         $id_siswa = $this->session->userdata('id');
@@ -99,9 +99,8 @@ class User extends CI_Controller{
     }
     public function tugassiswaindividu()
     {
-        $data['title'] = 'Upload Individu';
+        $data['title'] = 'Tugas Individu';
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
-        
         
         $data['kode'] = $this->input->post('kode');
         $data['mapel'] = $this->user_model->get_mapelkelas($data['kode']);
@@ -125,14 +124,16 @@ class User extends CI_Controller{
     }
     public function cektugassiswaindividu()
     {
-        $data['title'] = 'Upload Individu';
+        $data['title'] = 'Tugas Individu';
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
         $data['kelas'] = $this->db->get_where('nama_kelas', ['nama_kelas' => $this->session->userdata('id_kelas')])->row_array();
-        $data['upload'] = $this->user_model->do_upload();
         
         $data['kode'] = $this->input->post('kode');
+        $data['mapel'] = $this->user_model->get_mapelkelas($data['kode']);
+        $id_tugas = 1;
         $id_siswa = $this->session->userdata('id');
         $data['kelas'] = $this->user_model->get_kode_id($id_siswa);
+        $data['download'] = $this->user_model->get_tugasdownload($data['kode'],$id_tugas);
         
         $kode = $this->input->post('kode');
         $date = date('y-m-d');
@@ -147,10 +148,12 @@ class User extends CI_Controller{
         );
         if($this->user_model->cekuploadsiswa($kode,$siswa)==false)
         {
+            $data['upload'] = $this->user_model->do_upload();
             $this->db->insert('tugas_siswa',$data1);
         }
         else
         {
+            $data['upload'] = $this->user_model->do_upload();
             $this->db->where('kode_kelas',$kode);
             $this->db->where('id_siswa',$siswa);
             $this->db->update('tugas_siswa',$data1);
@@ -163,7 +166,7 @@ class User extends CI_Controller{
     }
     public function lihatkelompok()
     {
-        $data['title'] = 'Cek kelompok';
+        $data['title'] = 'Lihat kelompok';
         $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
 
         $id_siswa = $this->session->userdata('id');
@@ -188,6 +191,115 @@ class User extends CI_Controller{
         $this->load->view('templates/sidebarsiswa',$data);
         $this->load->view('templates/topbarsiswa',$data);
         $this->load->view('user/kelompok/tablekelompok',$data);
+        $this->load->view('templates/footersiswa');
+    }
+    public function tugaskelompok()
+    {
+        $data['title'] = 'Tugas Kelompok';
+        $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        
+        $id_siswa = $this->session->userdata('id');
+        $data['kelas'] = $this->user_model->get_kode_id($id_siswa);
+        
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarsiswa',$data);
+        $this->load->view('templates/topbarsiswa',$data);
+        $this->load->view('user/tugaskelompok',$data);
+        $this->load->view('templates/footersiswa');
+    }
+    public function tugassiswakelompok()
+    {
+        $data['title'] = 'Tugas Kelompok';
+        $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        
+        $data['kode'] = $this->input->post('kode');
+        $data['mapel'] = $this->user_model->get_mapelkelas($data['kode']);
+        $id_tugas = 2;
+        $id_siswa = $this->session->userdata('id');
+        $data['siswa'] = $this->user_model->get_bagikelompok();
+        $data['kelas'] = $this->user_model->get_kode_id2($id_siswa);
+        $data['download'] = $this->user_model->get_tugasdownload($data['kode'],$id_tugas);
+        
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarsiswa',$data);
+        $this->load->view('templates/topbarsiswa',$data);
+        $this->load->view('user/tugas/tugassiswakelompok',$data);
+        $this->load->view('templates/footersiswa');
+    }
+    public function cektugassiswakelompok()
+    {
+        $data['title'] = 'Tugas Individu';
+        $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        $data['kelas'] = $this->db->get_where('nama_kelas', ['nama_kelas' => $this->session->userdata('id_kelas')])->row_array();
+        
+        $data['kode'] = $this->input->post('kode');
+        $data['mapel'] = $this->user_model->get_mapelkelas($data['kode']);
+        $id_tugas = 2;
+        $id_siswa = $this->session->userdata('id');
+        $data['siswa'] = $this->user_model->get_bagikelompok();
+        $data['kelas'] = $this->user_model->get_kode_id($id_siswa);
+        $data['download'] = $this->user_model->get_tugasdownload($data['kode'],$id_tugas);
+        
+        $kode = $this->input->post('kode');
+        $kel = $this->input->post('id_kelompok');
+        $date = date('y-m-d');
+        
+        $doc = $_FILES['doc']['name'];
+        $test = str_replace(' ','_',$doc);
+        $data1 = array(
+            'id_kode_kelas' => $kode,
+            'id_tugas' => $id_tugas,
+            'id_kelompok' => $kel,
+            'nama_dokumen' => $test,
+            'date' => $date 
+        );
+        if($this->user_model->cekuploadsiswakelompok($kode,$kel)==false)
+        {
+            $data['upload'] = $this->user_model->do_upload2();
+            $this->db->insert('tugas_siswa_kelompok',$data1);
+        }
+        else
+        {
+            $data['upload'] = $this->user_model->do_upload2();
+            $this->db->where('id_kode_kelas',$kode);
+            $this->db->where('id_kelompok',$kel);
+            $this->db->update('tugas_siswa_kelompok',$data1);
+        }
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarsiswa',$data);
+        $this->load->view('templates/topbarsiswa',$data);
+        $this->load->view('user/tugas/tugassiswakelompok',$data);
+        $this->load->view('templates/footersiswa');
+    }
+    public function nilai()
+    {
+        $data['title'] = 'Nilai Kelompok';
+        $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        
+        $id_siswa = $this->session->userdata('id');
+        $data['kelas'] = $this->user_model->get_kode_id($id_siswa);
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarsiswa',$data);
+        $this->load->view('templates/topbarsiswa',$data);
+        $this->load->view('user/nilai',$data);
+        $this->load->view('templates/footersiswa');
+    }
+    public function nilaisiswakelompok()
+    {
+        $data['title'] = 'Nilai Kelompok';
+        $data['user'] = $this->db->get_where('nama_siswa', ['nama_siswa' => $this->session->userdata('nama')])->row_array();
+        
+        $id_siswa = $this->session->userdata('id');
+        $data['kode'] = $this->input->post('kode');
+        
+        $data['kelas'] = $this->user_model->get_kode_id($id_siswa);
+        $data['siswa'] = $this->user_model->get_bagikelompok();
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarsiswa',$data);
+        $this->load->view('templates/topbarsiswa',$data);
+        $this->load->view('user/nilai/nilaisiswakelompok',$data);
         $this->load->view('templates/footersiswa');
     }
 }

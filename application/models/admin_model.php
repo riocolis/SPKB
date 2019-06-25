@@ -46,9 +46,13 @@ class Admin_model extends CI_Model
     }
     public function get_tugasiswaindividu($kode)
     {
-        $this->db->where('kode_kelas',$kode);
+        $this->db->select('*');
+        $this->db->from('tugas_siswa');
         $this->db->join('nama_siswa','tugas_siswa.id_siswa = nama_siswa.id');
-        $query = $this->db->get('tugas_siswa');
+        $this->db->join('kelas','tugas_siswa.id_kode_kelas = kelas.kode_kelas');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
+        $this->db->where('kode_kelas',$kode);
+        $query = $this->db->get();
         return $query->result_array();
     }
     public function get_tugasiswakelompok($kode)
@@ -132,6 +136,10 @@ class Admin_model extends CI_Model
         return $query->row_array();
     }
 
+    public function downloadkelompok($nama){
+        $query = $this->db->get_where('tugas_siswa_kelompok',array('nama_dokumen'=> $nama));
+        return $query->row_array();
+    }
     
     public function getallnilai($kode,$jenis)
     {
@@ -144,6 +152,22 @@ class Admin_model extends CI_Model
         $this->db->where('id_kode_kelas ',$kode);
         $this->db->where('id_tugas',$jenis);
         $this->db->order_by('id_siswa','ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getallnilaikelompok($kode,$jenis)
+    {
+        $this->db->select('*');
+        $this->db->from('nilai');
+        $this->db->join('kelas','nilai.id_kode_kelas = kelas.kode_kelas');
+        $this->db->join('nama_tugas','nilai.id_tugas = nama_tugas.id');
+        $this->db->join('nama_siswa','nilai.id_siswa = nama_siswa.id');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
+        $this->db->join('kelompok','nilai.id_siswa = kelompok.id_siswa');
+        $this->db->where('id_kode_kelas ',$kode);
+        $this->db->where('nilai.id_tugas',$jenis);
+        $this->db->order_by('kelompok.id_kelompok','ASC');
+        $this->db->order_by('kelompok.id','ASC');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -192,6 +216,7 @@ class Admin_model extends CI_Model
             $tampung= array(
                 'kode_kelas'=> $ts['kode_kelas'],
                 'id_nis'=> $ts['id_nis'],
+                'id_siswa'=> $ts['id_siswa'],
                 'nama_siswa'=> $ts['nama_siswa'],
                 'jenis_kelamin'=> $ts['jenis_kelamin'],
                 'id_tugas'=> $ts['id_tugas'],
@@ -277,6 +302,15 @@ class Admin_model extends CI_Model
         $query = $this->db->get('kelompok');
         return $query->result_array();
     }
+    public function get_kelompoksiswanilai($kode,$id_kel)
+    {
+        $this->db->where('kode_kelas',$kode);
+        $this->db->where('id_kelompok',$id_kel);
+        $this->db->join('nilai','nilai.id_siswa = kelompok.id_siswa AND nilai.id_tugas = kelompok.id_tugas');
+        $this->db->order_by('kelompok.id_kelompok','ASC');
+        $query = $this->db->get('kelompok');
+        return $query->result_array();
+    }
     public function cekkodekelompok($kode)
     {
         $this->db->where('kode_kelas',$kode);
@@ -319,6 +353,16 @@ class Admin_model extends CI_Model
         $this->db->where('kode_kelas',$data);
         $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $query = $this->db->get('kelas');
+        return $query->result_array();
+    }
+    public function tampiltugaskelompok($kode,$tugas)
+    {
+        $this->db->select('*');
+        $this->db->from('tugas_siswa_kelompok');
+        $this->db->join('kelompok','tugas_siswa_kelompok.id_kelompok = kelompok.id_kelompok');
+        $this->db->where('id_kode_kelas',$kode);
+        $this->db->where('tugas_siswa_kelompok.id_tugas',$tugas);
+        $query = $this->db->get();
         return $query->result_array();
     }
 }

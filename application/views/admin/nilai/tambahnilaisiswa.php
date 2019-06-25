@@ -2,6 +2,7 @@
         <div class="container-fluid">
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+            <h1 class="h2 mb-4"><?= $simple; ?>-<?php foreach($mapel as $ms) { ?><?= $ms['nama_mapel'];?><?php } ?></h1>
             <a href="<?= base_url('admin/kategorinilai') ?>" class="btn btn-danger mb-3" >Kembali</a>
             <div class="row">
                 <div class="col-lg-8">  

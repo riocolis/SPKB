@@ -5,7 +5,7 @@
           <h1 class="h3 mb-4 text-gray-800"><?= $title; ?> </h1>
           <div class="row">
             <div class="col-lg-6">
-              <form action="<?= base_url('user/tugassiswaindividu') ?>" method="post">
+              <form action="<?= base_url('user/nilaisiswakelompok') ?>" method="post">
                 <label>Kode Kelas</label>
                 <select name="kode" id="kode" class="form-control form-control-lg">
                   <option value="0">Pilih Kode Kelas</option>
@@ -14,7 +14,7 @@
                   <?php } ?>
                 </select>
                 <hr>
-                <button type="submit" class="btn btn-primary">Lihat Tugas</button>
+                <button type="submit" class="btn btn-primary">Lihat Nilai</button>
               </form>
             </div>
           </div>

@@ -200,19 +200,41 @@ class Admin extends CI_Controller{
         $this->load->view('admin/tugas/tugassiswa',$data);
         $this->load->view('templates/footerguru');
     }
-    public function lihattugasiswa()
+    public function tugassiswaindividu()
     {
-        $data['title'] = 'Table Tugas Siswa';
+        $data['title'] = 'Tugas Siswa Individu';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/tugas/tugassiswaindividu',$data);
+        $this->load->view('templates/footerguru');
+    }
+    public function tugassiswakelompok()
+    {
+        $data['title'] = 'Tugas Siswa Kelompok';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/tugas/tugassiswakelompok',$data);
+        $this->load->view('templates/footerguru');
+    }
+    public function lihattugasiswaindividu()
+    {
+        $data['title'] = 'Table Tugas Siswa Individu';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $kode = $this->input->post('kode');
         $data['tugas'] = $this->input->post('tugas');
         if($data['tugas'] == 1)
         {
             $data['siswa']= $this->admin_model->get_tugasiswaindividu($kode);
-        }
-        else
-        {
-            $data['siswa']=$this->admin_model->tampilsiswakelompok($kode,$data['tugas']);
         }
         $this->load->view('templates/header',$data);
         $this->load->view('templates/sidebarguru',$data);
@@ -221,6 +243,23 @@ class Admin extends CI_Controller{
         $this->load->view('templates/footerguru');
     }
 
+    public function lihattugasiswakelompok()
+    {
+        $data['title'] = 'Table Tugas Siswa Kelompok';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $kode = $this->input->post('kode');
+        $data['tugas'] = $this->input->post('tugas');
+        if($data['tugas'] == 2)
+        {
+            $data['siswa']= $this->admin_model->tampiltugaskelompok($kode,$data['tugas']);
+        }
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/tugas/lihattugaskelompok',$data);
+        $this->load->view('templates/footerguru');
+    }
+    
     public function download($nama)
     {
         $this->load->helper('download');
@@ -236,6 +275,15 @@ class Admin extends CI_Controller{
         $file = 'dokumensiswa/'.$fileinfo['nama_dokumen'];
         force_download($file, NULL);
     }
+
+    public function downloadtugassiswakelompok($nama)
+    {
+        $this->load->helper('download');
+        $fileinfo = $this->admin_model->downloadkelompok($nama);
+        $file = 'dokumensiswakelompok/'.$fileinfo['nama_dokumen'];
+        force_download($file, NULL);
+    }
+
 
     public function kategorinilai()
     {
@@ -254,10 +302,44 @@ class Admin extends CI_Controller{
         $this->load->view('templates/footerguru');
 
     }
+    public function nilaitugasindividu()
+    {
+        $data['title'] = 'Nilai Individu';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
+        
+        $this->form_validation->set_rules('kode','KodeKelas','required');
+        $this->form_validation->set_rules('tugas','Tugas','required');
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/nilai/nilaisiswa',$data);
+        $this->load->view('templates/footerguru');
+
+    }
+    public function nilaitugaskelompok()
+    {
+        $data['title'] = 'Nilai Kelompok';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
+        
+        $this->form_validation->set_rules('kode','KodeKelas','required');
+        $this->form_validation->set_rules('tugas','Tugas','required');
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/nilai/nilaisiswakelompok',$data);
+        $this->load->view('templates/footerguru');
+
+    }
 
     public function tambahnilaisiswa()
     {
-        $data['title'] = 'Tampil Nilai';
+        $data['title'] = 'Tampil Nilai Individu';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $data['tugas'] = $this->admin_model->get_tugas();
         $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
@@ -267,6 +349,7 @@ class Admin extends CI_Controller{
         $data['simple'] = $kode;
         $data['tugas'] = $tugas;
         $data['siswa'] = $this->admin_model->getallnilai($kode,$tugas);
+        $data['mapel'] = $this->admin_model->get_mapelkelas($kode);
 
         $this->load->view('templates/header',$data);
         $this->load->view('templates/sidebarguru',$data);
@@ -275,9 +358,32 @@ class Admin extends CI_Controller{
         $this->load->view('templates/footerguru');
     }
 
+    public function tambahnilaisiswakelompok()
+    {
+        $data['title'] = 'Tampil Nilai Kelompok';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $data['tugas'] = $this->admin_model->get_tugas();
+        $data['kelas'] = $this->admin_model->kelas($this->session->userdata('nama'));
+
+        $kode = $this->input->post('kode');
+        $tugas = $this->input->post('tugas');
+        $data['simple'] = $kode;
+        $data['tugas'] = $tugas;
+        $data['siswa'] = $this->admin_model->getallnilaikelompok($kode,$tugas);
+        $data['mapel'] = $this->admin_model->get_mapelkelas($kode);
+        $data['test']=$this->admin_model->get_bagikelompok();
+        
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/nilai/tambahnilaisiswakelompok',$data);
+        $this->load->view('templates/footerguru');
+    }
+
     public function editnilai()
     {
-        $data['title'] = 'Edit Nilai';
+        $data['title'] = 'Edit Nilai Individu';
         $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
         $kode = $this->input->post('kode1');
         $tugas = $this->input->post('tugas1');
@@ -295,11 +401,44 @@ class Admin extends CI_Controller{
         }
         $data['simple'] = $kode;
         $data['tugas'] = $tugas;
-        $data['siswa'] = $this->admin_model->getallnilai($kode,$tugas);
+        $data['siswa'] = $this->admin_model->getallnilaikelompok($kode,$tugas);
+        $data['mapel'] = $this->admin_model->get_mapelkelas($kode);
         $this->load->view('templates/header',$data);
         $this->load->view('templates/sidebarguru',$data);
         $this->load->view('templates/topbarguru',$data);
         $this->load->view('admin/nilai/editnilai',$data);
+        $this->load->view('templates/footerguru');
+    }
+
+    public function editnilaikelompok()
+    {
+        $data['title'] = 'Edit Nilai Kelompok';
+        $data['user'] = $this->db->get_where('nama_guru', ['username' => $this->session->userdata('nama')])->row_array();
+        $kode = $this->input->post('kode1');
+        $tugas = $this->input->post('tugas1');
+        $id_siswa = $this->input->post('id_siswa');
+        $nilai = $this->input->post('nilai');
+
+        $data1 = array(
+            'id_kode_kelas' => $kode,
+            'id_tugas' => $tugas,
+            'id_siswa' => $id_siswa,
+            'nilai' => $nilai
+        );
+        if($id_siswa != null || $id_siswa = '')
+        {
+            $this->admin_model->update_nilai($data1,$id_siswa,$kode,$tugas);
+        }
+        $data['simple'] = $kode;
+        $data['tugas'] = $tugas;
+        $data['siswa'] = $this->admin_model->getallnilaikelompok($kode,$tugas);
+        $data['mapel'] = $this->admin_model->get_mapelkelas($kode);
+        $data['test']=$this->admin_model->get_bagikelompok();
+
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/sidebarguru',$data);
+        $this->load->view('templates/topbarguru',$data);
+        $this->load->view('admin/nilai/editnilaikelompok',$data);
         $this->load->view('templates/footerguru');
     }
 

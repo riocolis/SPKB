@@ -11,9 +11,17 @@
             <a href="" class="btn btn-success mb-3" data-toggle="modal" data-target="#downloadtugas">Download</a>
             <?php } ?>
             <hr>
+            <?php if($this->user_model->cekuploadsiswa($kode,$this->session->userdata('id'))==false){?>
             <div class="row">
                 <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#uploadtugas">Upload Tugas</a>
             </div>
+            <?php }
+            else
+            {?>
+            <div class="row">
+                <h1>Anda Sudah Upload Tugas </h1>
+            </div>
+            <?php } ?>
         </div>
         <!-- /.container-fluid -->
 
