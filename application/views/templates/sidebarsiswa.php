@@ -6,9 +6,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user');?>">
         <div class="sidebar-brand-icon">
-          <i class="fas fa-book-open"></i>
+        <i class="fas fa-book-open"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SisRank</div>
+        <div class="sidebar-brand-text mx-3">SPKB</div>
       </a>
 
       <!-- Divider -->

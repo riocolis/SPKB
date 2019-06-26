@@ -10,6 +10,7 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Kode Kelas</th>
+                                <th scope="col">Mata Pelajaran</th>
                                 <th scope="col">Kelompok</th>
                                 <th scope="col">Jawaban</th>
                             </tr>

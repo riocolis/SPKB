@@ -35,7 +35,9 @@
                         </tbody>
                         <?php $c++;} } ?>
                     </table>
-                    <?php $t++; }?>
+                    <?php
+                     $t++; }
+                    ?>
                 </div>
 
             </div>

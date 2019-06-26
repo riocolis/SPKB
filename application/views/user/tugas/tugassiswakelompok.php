@@ -15,7 +15,7 @@
                     foreach ($siswa as $ty) {
                         if ($ty['kode_kelas'] == $kode && $ty['nama_siswa'] == $this->session->userdata('nama')) {
                             $b = $this->user_model->cekkodekelompok($kode, $ty['id_kelompok']); 
-                            $z = $ty['id_kelompok']?>
+                            $z = $ty['id_kelompok'];?>
                             <h4>Kelompok <?= $ty['id_kelompok']; ?></h4>
                             <table class="table table-hover">
                                 <thead>
@@ -40,7 +40,11 @@
                                     </tbody>
                                     <?php $c++;
                                 }
-                            } ?>
+                            }
+                            else
+                            {
+                                $z=0;
+                         }?>
                         </table>
                         <?php $t++;
                     } ?>
