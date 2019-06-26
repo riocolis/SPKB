@@ -140,7 +140,16 @@ class Admin extends CI_Controller{
                 'nama_dokumen' => $test,
                 'date' => $waktu
             );
-            $this->db->insert('tugas',$data);
+            if($this->admin_model->cektugas($kode,$tugas)==true)
+            {
+                $this->db->where('id_kode_kelas',$kode);
+                $this->db->where('id_tugas',$tugas);
+                $this->db->update('tugas',$data);
+            }
+            else
+            {
+                $this->db->insert('tugas',$data);
+            }
             redirect('admin/buattugas');
         }
     }

@@ -361,7 +361,9 @@ class Admin_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tugas_siswa_kelompok');
+        $this->db->join('kelas','tugas_siswa_kelompok.id_kode_kelas = kelas.kode_kelas');
         $this->db->join('kelompok','tugas_siswa_kelompok.id_kelompok = kelompok.id_kelompok');
+        $this->db->join('nama_mapel','kelas.id_mapel = nama_mapel.id');
         $this->db->where('id_kode_kelas',$kode);
         $this->db->where('tugas_siswa_kelompok.id_tugas',$tugas);
         $query = $this->db->get();

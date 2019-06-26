@@ -105,8 +105,8 @@ class authsiswa extends CI_Controller{
                     'id_kelas' => $this->input->post('kelas')
                 ];
                 $this->db->insert('nama_siswa',$data);
-                $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Data simpan Suksess !! </div>');
-                redirect('authsiswa/registration');
+                $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Data simpan Baru Suksess !! </div>');
+                redirect('authsiswa');
             }
 
         }

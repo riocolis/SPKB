@@ -141,7 +141,7 @@ class User extends CI_Controller{
         $doc = $_FILES['doc']['name'];
         $test = str_replace(' ','_',$doc);
         $data1 = array(
-            'kode_kelas' => $kode,
+            'id_kode_kelas' => $kode,
             'id_siswa' => $siswa,
             'nama_dokumen' => $test,
             'date' => $date 

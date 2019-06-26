@@ -22,6 +22,7 @@
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
                                     <td><?= $sw['kode_kelas']; ?></td>
+                                    <td><?= $sw['nama_mapel']; ?></td>
                                     <td>Kelompok <?= $sw['id_kelompok']; ?></td>
                                     <td><a href="<?= base_url() . 'admin/downloadtugassiswakelompok/'.$sw['nama_dokumen']; ?>" class="btn btn-success btn-sm">Download</a></td>
                                 </tr>
