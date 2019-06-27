@@ -6,7 +6,7 @@ class authguru extends CI_Controller{
     {
         parent::__construct();
         $this->load->library('form_validation');
-
+        $this->load->model('admin_model');
     }
 
     public function index()
@@ -76,6 +76,22 @@ class authguru extends CI_Controller{
             $this->session->set_flashdata('message1','<div class="alert alert-danger" role="alert">Data GAGAL !! </div>');
         }
         else {
+            if($this->admin_model->cek_guru($this->input->post('username'))==true)
+            {
+                $data = [
+                    'username' => htmlspecialchars($this->input->post('username')),
+                    'nama_guru' =>  htmlspecialchars($this->input->post('nama')),
+                    'jenis_kelamin' => $this->input->post('kelamin'),
+                    'password' =>  password_hash($this->input->post('password1'),PASSWORD_DEFAULT),
+                    
+                ];
+                $this->db->where('username',$this->input->post('username'));
+                $this->db->update('nama_guru',$data);
+                $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Data Edit Suksess !! </div>');
+                redirect('authguru');
+            }
+            else
+            {
             $data = [
                 'username' => htmlspecialchars($this->input->post('username')),
                 'nama_guru' =>  htmlspecialchars($this->input->post('nama')),
@@ -86,7 +102,7 @@ class authguru extends CI_Controller{
             $this->db->insert('nama_guru',$data);
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Data simpan Suksess !! </div>');
             redirect('authguru');
-
+            }
         }
         
     }

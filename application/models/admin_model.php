@@ -369,6 +369,19 @@ class Admin_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function cek_guru($nama)
+    {
+        $this->db->where('username',$nama);
+        $query = $this->db->get('nama_guru');
+        if($query->num_rows() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 
 ?>
